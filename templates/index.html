@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translate App</title>
  <style>
-    /* 🌌 Qora fon va yulduzli koinot */
+    /* 🌌 Koinot fon (qora + yulduzlar) */
     body {
         font-family: 'Segoe UI', sans-serif;
         margin: 0;
@@ -14,36 +14,36 @@
         overflow: hidden;
         background: radial-gradient(circle at bottom, #020202 0%, #000 100%);
         color: white;
+        position: relative;
     }
 
-    /* 🌟 Kichik yulduzlar (fon) */
-    body::before, body::after {
-        content: '';
-        position: absolute;
-        top: 0; left: 0;
-        width: 200%;
-        height: 200%;
+    /* ✨ Yulduzlar — joyida turadi (nuqtalar) */
+    .stars {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        background-image:
+            radial-gradient(2px 2px at 20px 30px, white, rgba(255,255,255,0)),
+            radial-gradient(1px 1px at 50px 80px, white, rgba(255,255,255,0)),
+            radial-gradient(1px 1px at 90px 120px, white, rgba(255,255,255,0)),
+            radial-gradient(2px 2px at 200px 50px, white, rgba(255,255,255,0)),
+            radial-gradient(1px 1px at 300px 150px, white, rgba(255,255,255,0)),
+            radial-gradient(1px 1px at 400px 100px, white, rgba(255,255,255,0)),
+            radial-gradient(1px 1px at 600px 200px, white, rgba(255,255,255,0)),
+            radial-gradient(2px 2px at 700px 80px, white, rgba(255,255,255,0)),
+            radial-gradient(1px 1px at 900px 120px, white, rgba(255,255,255,0)),
+            radial-gradient(1px 1px at 1100px 300px, white, rgba(255,255,255,0)),
+            radial-gradient(1px 1px at 1300px 200px, white, rgba(255,255,255,0)),
+            radial-gradient(1px 1px at 1500px 100px, white, rgba(255,255,255,0));
         background-repeat: repeat;
-        background-size: 3px 3px;
+        background-size: 1600px 800px;
+        position: absolute;
+        top: 0;
+        left: 0;
         z-index: 0;
-        opacity: 0.25;
-        animation: starsMove 120s linear infinite;
     }
 
-    body::before {
-        background-image: radial-gradient(white 1px, transparent 1px);
-    }
-    body::after {
-        background-image: radial-gradient(rgba(255,255,255,0.7) 1px, transparent 1px);
-        animation-direction: reverse;
-    }
-
-    @keyframes starsMove {
-        from { transform: translateY(0); }
-        to { transform: translateY(-500px); }
-    }
-
-    /* 🌠 O‘tuvchi yulduz (meteor effekti) */
+    /* 🌠 O‘tuvchi yulduz (meteor) */
     .shooting-star {
         position: absolute;
         top: -10px;
@@ -54,7 +54,7 @@
         border-radius: 50%;
         opacity: 0;
         transform: rotate(45deg);
-        animation: shoot 10s infinite ease-in-out;
+        animation: shoot 12s infinite ease-in-out;
     }
 
     @keyframes shoot {
@@ -71,18 +71,19 @@
         }
     }
 
-    /* 📦 Asosiy oynacha */
+    /* 📦 Asosiy oynacha — kichikroq va shaffof */
     .container {
         position: relative;
-        z-index: 1;
-        max-width: 600px;
+        z-index: 2;
+        max-width: 480px;
         margin: 100px auto;
-        padding: 40px;
-        background: rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.06);
         border-radius: 20px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(15px);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
         animation: fadeIn 1.5s ease-in-out;
     }
 
@@ -92,19 +93,18 @@
     }
 
     h1 {
-        text-align: center;
-        font-size: 34px;
-        margin-bottom: 25px;
+        font-size: 30px;
+        margin-bottom: 20px;
         color: rgba(255,255,255,0.95);
         text-shadow: 0 0 15px rgba(255,255,255,0.3);
     }
 
     textarea, select, button {
         width: 100%;
-        padding: 12px;
-        margin: 10px 0;
+        padding: 10px;
+        margin: 8px 0;
         border: none;
-        border-radius: 12px;
+        border-radius: 10px;
         font-size: 16px;
         outline: none;
     }
@@ -152,7 +152,8 @@
     }
 </style>
 
-<!-- 🌠 Meteor elementi -->
+<!-- 🌌 Orqa fon elementlari -->
+<div class="stars"></div>
 <div class="shooting-star"></div>
 
 </head>
