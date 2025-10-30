@@ -2,6 +2,7 @@
 from deep_translator import GoogleTranslator
 from gtts import gTTS
 import os
+import uuid
 
 app = Flask(__name__)
 
@@ -14,6 +15,7 @@ def index():
         text = request.form["text"]
         from_lang = request.form["from_lang"]
         to_lang = request.form["to_lang"]
+        tts_lang = request.form.get("tts_lang", to_lang)  # Audio tilini alohida tanlash
 
         # Tarjima qilish
         translated_text = GoogleTranslator(source=from_lang, target=to_lang).translate(text)
@@ -21,8 +23,9 @@ def index():
         # Ovozli fayl yaratish
         try:
             os.makedirs("static", exist_ok=True)
-            audio_file = "static/voice.mp3"
-            tts = gTTS(translated_text, lang=to_lang)
+            # Fayl nomini har doim noyob qilamiz
+            audio_file = f"static/voice_{uuid.uuid4().hex}.mp3"
+            tts = gTTS(translated_text, lang=tts_lang)
             tts.save(audio_file)
         except Exception as e:
             print("Ovoz yaratishda xato:", e)
