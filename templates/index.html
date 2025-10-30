@@ -5,30 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translate App</title>
     <style>
+    /* 🌌 Asosiy fon (3D qora osmon va harakatlanuvchi yulduzlar) */
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #1f3b4d; /* Toq ko‘k orqa fon */
-        color: white;
-        text-align: center;
         margin: 0;
         padding: 0;
+        height: 100vh;
+        color: white;
+        overflow: hidden;
+        background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
     }
 
+    /* Yulduzlar animatsiyasi */
+    body::before, body::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 200%;
+        height: 200%;
+        background-repeat: repeat;
+        background-size: 2px 2px;
+        z-index: 0;
+        opacity: 0.5;
+        animation: stars 60s linear infinite;
+    }
+
+    body::before {
+        background-image: radial-gradient(white 1px, transparent 1px);
+    }
+
+    body::after {
+        background-image: radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px);
+        animation-direction: reverse;
+    }
+
+    @keyframes stars {
+        from { transform: translateY(0); }
+        to { transform: translateY(-1000px); }
+    }
+
+    /* 📦 Kontayner (blur oynali oynacha) */
     .container {
+        position: relative;
+        z-index: 1;
         max-width: 600px;
-        margin: 60px auto;
-        background: rgba(255, 255, 255, 0.08); /* shaffof oynalar */
+        margin: 80px auto;
+        background: rgba(255, 255, 255, 0.08);
         border-radius: 20px;
-        padding: 35px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(10px); /* shaffof oynani blur effekti bilan */
+        padding: 40px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.2);
+        animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
     }
 
     h1 {
-        font-size: 32px;
+        font-size: 34px;
         margin-bottom: 25px;
         letter-spacing: 1px;
+        color: rgba(255,255,255,0.9);
+        text-shadow: 0 0 10px rgba(255,255,255,0.3);
     }
 
     textarea, select, button {
@@ -43,33 +84,38 @@
 
     textarea {
         resize: none;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.15);
         color: white;
+        backdrop-filter: blur(6px);
     }
 
     select {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.15);
         color: white;
+        backdrop-filter: blur(6px);
     }
 
     button {
-        background: linear-gradient(90deg, #27ae60, #2ecc71);
+        background: linear-gradient(90deg, #00c6ff, #0072ff);
         color: white;
         font-weight: bold;
         cursor: pointer;
         transition: 0.3s;
+        box-shadow: 0 0 10px rgba(0, 114, 255, 0.5);
     }
 
     button:hover {
-        background: linear-gradient(90deg, #2ecc71, #27ae60);
+        background: linear-gradient(90deg, #0072ff, #00c6ff);
+        box-shadow: 0 0 20px rgba(0, 114, 255, 0.8);
     }
 
     .result {
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.1);
         padding: 20px;
         border-radius: 15px;
         margin-top: 25px;
         border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
     }
 
     audio {
