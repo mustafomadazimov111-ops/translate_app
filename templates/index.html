@@ -1,107 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarjima Dasturi</title>
+    <title>Translate App</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            color: white;
+            text-align: center;
             margin: 0;
-            padding: 20px;
-            color: #222;
+            padding: 0;
         }
         .container {
-            background: #fff;
-            width: 100%;
-            max-width: 400px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            padding: 25px;
-            text-align: center;
-            margin-top: 50px;
+            max-width: 600px;
+            margin: 60px auto;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
         h1 {
-            color: #0078ff;
+            font-size: 28px;
             margin-bottom: 20px;
         }
-        textarea {
+        textarea, select, button {
             width: 100%;
-            height: 100px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
             padding: 10px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 10px;
             font-size: 16px;
-            outline: none;
+        }
+        textarea {
             resize: none;
         }
-        select, button {
-            width: 48%;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-            outline: none;
-        }
         button {
-            background-color: #0078ff;
-            color: #fff;
+            background-color: #27ae60;
+            color: white;
             font-weight: bold;
-            border: none;
             cursor: pointer;
-            transition: 0.3s;
         }
         button:hover {
-            background-color: #005ecb;
+            background-color: #2ecc71;
         }
         .result {
-            margin-top: 20px;
-        }
-        .result p {
-            background: #f7f7f7;
+            background: rgba(255,255,255,0.2);
             padding: 15px;
             border-radius: 10px;
-            font-size: 16px;
+            margin-top: 20px;
         }
         audio {
             margin-top: 10px;
-            width: 100%;
-        }
-        footer {
-            margin-top: auto;
-            text-align: center;
-            font-size: 13px;
-            color: white;
-            opacity: 0.8;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🌍 Tarjima Dasturi</h1>
+        <h1>🌍 Translate App</h1>
         <form method="POST">
-            <textarea name="text" placeholder="Matn kiriting..."></textarea><br>
-            <div style="display: flex; justify-content: space-between;">
-                <select name="from_lang">
-                    <option value="auto">Avto</option>
-                    <option value="en">Ingliz</option>
-                    <option value="ru">Rus</option>
-                    <option value="uz">O'zbek</option>
-                </select>
-                <select name="to_lang">
-                    <option value="en">Ingliz</option>
-                    <option value="ru">Rus</option>
-                    <option value="uz">O'zbek</option>
-                    <option value="fr">Fransuz</option>
-                </select>
-            </div>
+            <label>Matn kiriting:</label>
+            <textarea name="text" rows="3" placeholder="Tarjima qilinadigan matnni yozing..." required></textarea>
+
+            <label>Qaysi tildan:</label>
+            <select name="from_lang">
+                <option value="uz">Uzbek</option>
+                <option value="en">English</option>
+                <option value="ru">Russian</option>
+            </select>
+
+            <label>Qaysi tilga:</label>
+            <select name="to_lang">
+                <option value="en">English</option>
+                <option value="uz">Uzbek</option>
+                <option value="ru">Russian</option>
+            </select>
+
             <button type="submit">Tarjima qilish</button>
         </form>
 
@@ -109,15 +84,16 @@
         <div class="result">
             <h3>Tarjima natijasi:</h3>
             <p>{{ translated_text }}</p>
+
             {% if audio_file %}
-                <audio controls>
-                    <source src="{{ audio_file }}" type="audio/mp3">
-                </audio>
+            <audio controls>
+                <source src="{{ audio_file }}" type="audio/mp3">
+                Brauzeringiz audio faylni qo‘llamaydi.
+            </audio>
             {% endif %}
         </div>
         {% endif %}
     </div>
-
-    <footer>© 2025 Tarjima Dasturi</footer>
 </body>
 </html>
+
